@@ -6,20 +6,7 @@ namespace Codewars
     {
         public static bool ValidatePin(string pin)
         {
-            var pattern = "";
-
-            if (pin.Length == 4)
-            {
-                pattern = @"\d{4}";
-            }
-            else if(pin.Length == 6)
-            {
-                pattern = @"\d{6}";
-            }
-            else
-            { return false; }
-
-           
+            var pattern = @"^(\d{4}|\d{6})$";
 
             Regex regx = new Regex(pattern);
 
