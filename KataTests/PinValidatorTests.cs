@@ -24,6 +24,12 @@ namespace KataTests
         {
             Assert.AreEqual(false, PinValidator.ValidatePin("a234"), "Wrong output for \"a234\"");
             Assert.AreEqual(false, PinValidator.ValidatePin(".234"), "Wrong output for \".234\"");
+
+            Assert.AreEqual(false, PinValidator.ValidatePin("3976I2"), "Wrong output for \"3976I2\"");
+            Assert.AreEqual(false, PinValidator.ValidatePin("7f7796"), "Wrong output for \"7f7796\"");
+
+            Assert.AreEqual(false, PinValidator.ValidatePin("+63000"), "Wrong output for \"+63000\"");
+            
         }
 
         [Test, Description("ValidatePin should return true for valid pins")]
