@@ -10,46 +10,39 @@ namespace Codewars
     {
         public static IEnumerable<T> UniqueInOrder<T>(IEnumerable<T> iterable)
         {
-            var results = new List<T>();
-
-            //loop through each element in list
-           
-
             
 
-            //greedy approach
+                var results = new List<T>();
 
-            //O(n) time and space complexity
+                //loop through each element in list
 
-            T previous = default(T);
+                //greedy approach
 
-            foreach(T current in iterable)
-            {
-                //if it is first, add it to results
-                if (previous.Equals(default(T)))
+                //O(n) time and space complexity
+
+                T previous = default(T);
+
+                foreach (T current in iterable)
                 {
-                    results.Add(current);
+                    //if it is first, or if the previous is null add it to results
+                    if (previous == null || previous.Equals(default(T)))
+                    {
+                        results.Add(current);
+                    }
+                    //if it is not equal to previous add it to results
+                    else if (!current.Equals(previous))
+                    {
+                        results.Add(current);
+                    }
+
+                    previous = current;
+
+                    //otherwise, do not add it.
                 }
-                //if it is not equal to previous add it to results
-                else if (!current.Equals(previous))
-                {
-                    results.Add(current);
-                }
-
-                previous = current;
-
-                //otherwise, do not add it.
-            }
 
 
-            //var theType = typeof(T);
-
-            //if (typeof(T).Equals(typeof(string)))
-            //{
-            //    results = results.ToArray();
-            //}
-
-            return results;
+                return results;
+            
         }
     }
 }
