@@ -52,6 +52,7 @@
     <Compile Include="RGBConverter.cs" />
     <Compile Include="SplitString.cs" />
     <Compile Include="TriangleCalculator.cs" />
+    <Compile Include="TripleDoubler.cs" />
     <Compile Include="UniqueInOrderKata.cs" />
     <Compile Include="Xbonacci.cs" />
   </ItemGroup>
