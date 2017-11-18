@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="CroquetTests.cs" />
     <Compile Include="DubstepTests.cs" />
+    <Compile Include="DuplicateCountTest.cs" />
     <Compile Include="DuplicateEncodeTests.cs" />
     <Compile Include="PinValidatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
