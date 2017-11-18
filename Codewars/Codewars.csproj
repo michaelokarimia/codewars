@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Croquet.cs" />
+    <Compile Include="Dubstep.cs" />
     <Compile Include="DuplicateEncoderKata.cs" />
     <Compile Include="PinValidator.cs" />
     <Compile Include="Program.cs" />
