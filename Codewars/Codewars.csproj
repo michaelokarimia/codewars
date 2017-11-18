@@ -52,6 +52,7 @@
     <Compile Include="SplitString.cs" />
     <Compile Include="TriangleCalculator.cs" />
     <Compile Include="UniqueInOrderKata.cs" />
+    <Compile Include="Xbonacci.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
