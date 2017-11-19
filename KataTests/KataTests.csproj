@@ -52,6 +52,7 @@
     <Compile Include="DuplicateCountTest.cs" />
     <Compile Include="DuplicateEncodeTests.cs" />
     <Compile Include="PinValidatorTests.cs" />
+    <Compile Include="PrimeDecompTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RGBConverterTests.cs" />
     <Compile Include="SplitStringTests.cs" />
