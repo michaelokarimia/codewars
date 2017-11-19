@@ -19,7 +19,7 @@ namespace KataTests
             variabonacci = null;
         }
 
-        [Test]
+        //[Test]
         public void Tests()
         {
             Assert.AreEqual(new double[] { 1, 1, 1, 3, 5, 9, 17, 31, 57, 105 }, variabonacci.Tribonacci(new double[] { 1, 1, 1 }, 10));
