@@ -88,7 +88,10 @@ namespace Codewars
             if (num < 2)
                 return false;
 
-            for (int i = 2; i < num; i++)
+            //optimise to only check square roots of numbers
+            int sqrt = (int)Math.Sqrt(num);
+
+            for (int i = 2; i < sqrt; i++)
             {
                 if (num % i == 0)
                     return false;
@@ -98,6 +101,3 @@ namespace Codewars
         }
     }
 }
-
-//"(2**2)(3**3)(5)(7)(11**2)(17)\"  
-//"2*2*3*3*3*5*7*11*11*17\"
