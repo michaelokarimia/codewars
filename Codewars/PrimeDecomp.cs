@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Codewars
 {
@@ -6,11 +7,11 @@ namespace Codewars
     {
         public static string factors(int lst)
         {
-            int[] primes = new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 };
-
             string result = "";
-            if (lst == 1)
+            if (lst < 2)
                 return "0";
+            if (lst == 2)
+                return "(2)";
 
             int i = 0;
 
@@ -19,6 +20,10 @@ namespace Codewars
             var runningTotal = lst;
 
             var currentPrimeDivisionCount = 0;
+
+            int[] primes = new int[] { };
+
+            primes = generatePrimesUpTo(lst);
 
             while (!isDecomposed)
             {
@@ -61,9 +66,36 @@ namespace Codewars
     
         }
 
+        private static int[] generatePrimesUpTo(int max)
+        {
+            var arry = new List<int>();
+
+            if (max < 2)
+                return arry.ToArray();
+            
+            for(int i = 2; i < max; i++)
+            {
+                if (isPrime(i))
+                    arry.Add(i);
+            }
+
+            return arry.ToArray();
+        }
 
 
-     
+        static bool isPrime(int num)
+        {
+            if (num < 2)
+                return false;
+
+            for (int i = 2; i < num; i++)
+            {
+                if (num % i == 0)
+                    return false;
+            }
+
+            return true;
+        }
     }
 }
 
