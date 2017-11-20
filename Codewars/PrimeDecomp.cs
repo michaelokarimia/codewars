@@ -27,7 +27,7 @@ namespace Codewars
             var runningTotal = max;
             var currentPrimeDivisionCount = 0;
 
-            var primesFound = false;
+            var previousPrime = prime;
 
 
 
@@ -47,21 +47,23 @@ namespace Codewars
                 {
                     runningTotal = runningTotal / prime;
                     currentPrimeDivisionCount++;
-                    primesFound = true;
                 }
                 if (currentPrimeDivisionCount > 0)
                 {
                     //append it to the result string if it's been divided
                     result += string.Format("({0}{1})", prime, currentPrimeDivisionCount > 1 ? "**" + currentPrimeDivisionCount : "");
                 }
+
+                previousPrime = prime;
+
                 //get the next value which is set to true and cross it off
                 prime = getNextPrime(flags, prime);
             }
 
-            if (!primesFound)
-            {
-                return string.Format("({0})", max);
-            }
+            if(result == "" || previousPrime < maxfactor)
+                result += string.Format("({0})", maxfactor);
+
+
 
 
             return result;

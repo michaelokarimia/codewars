@@ -11,7 +11,7 @@ namespace KataTests
     {
 
         [Test]
-        public void Test1()
+        public void PrimeDecompositionTests()
         {
 
             int lst = 2;
@@ -47,7 +47,18 @@ namespace KataTests
 
             lst = (int)(int.MaxValue * 0.99d);
 
-            Assert.AreEqual("(2)(5)(47)", PrimeDecomp.factors(lst));
+            Assert.AreEqual("(2)(5)(47)(4523423)", PrimeDecomp.factors(lst));
+
+            
+            lst = 933555431;
+
+            Assert.AreEqual("(7537)(123863)", PrimeDecomp.factors(lst));
+
+            lst = 987654321;
+
+            Assert.AreEqual("(3**2)(17**2)(379721)", PrimeDecomp.factors(lst));
+
+            
 
         }
     }
