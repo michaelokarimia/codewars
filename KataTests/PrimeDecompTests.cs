@@ -41,10 +41,13 @@ namespace KataTests
             lst = 7775460;
             Assert.AreEqual("(2**2)(3**3)(5)(7)(11**2)(17)", PrimeDecomp.factors(lst));
 
+            lst = (int)(int.MaxValue/2);
 
-            lst = (int)(int.MaxValue / 2);
             Assert.AreEqual("(3**2)(7)(11)(31)(151)(331)", PrimeDecomp.factors(lst));
 
+            lst = (int)(int.MaxValue * 0.99d);
+
+            Assert.AreEqual("(2)(5)(47)", PrimeDecomp.factors(lst));
 
         }
     }

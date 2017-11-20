@@ -9,8 +9,10 @@ namespace Codewars
             string result = "";
             if (max < 2)
                 return "0";
- 
-            bool[] flags = new bool[max + 1];
+
+            var maxfactor = CalcMaxfactor(max);
+
+            bool[] flags = new bool[maxfactor + 1];
 
             int count = 0;
 
@@ -29,7 +31,8 @@ namespace Codewars
 
 
 
-            while (prime <= Math.Sqrt(max))
+            double root = Math.Sqrt(max);
+            while (prime <= root)
             {
 
                 //squareRoot optimisation saves us a lot of time
@@ -88,6 +91,25 @@ namespace Codewars
             }
 
             return next;
+        }
+
+
+        public static int CalcMaxfactor(int n)
+        {
+            int k = 2;
+            while (k * k <= n)
+            {
+                if (n % k == 0)
+                {
+                    n /= k;
+                }
+                else
+                {
+                    ++k;
+                }
+            }
+
+            return n;
         }
     }
 }
