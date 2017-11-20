@@ -13,7 +13,7 @@ namespace Codewars
             if (lst == 2)
                 return "(2)";
 
-            int i = 0;
+       
 
             bool isDecomposed = false;
 
@@ -21,19 +21,19 @@ namespace Codewars
 
             var currentPrimeDivisionCount = 0;
 
-            int[] primes = new int[] { };
 
-            primes = generatePrimesUpTo(lst);
+            var sieve = SieveOfEratothenes(lst);
+
+            var currentPrime = 2;
+            var previousPrime = 1;
 
             while (!isDecomposed)
             {
-                //start with the smallest prime first
-                var prime = primes[i];
 
                 //check if we can divide by current prime
-                if(runningTotal % prime == 0)
+                if(runningTotal % currentPrime == 0)
                 {
-                    runningTotal = runningTotal / prime;
+                    runningTotal = runningTotal / currentPrime;
                     currentPrimeDivisionCount++;
                     
                 }
@@ -45,19 +45,23 @@ namespace Codewars
                     if (currentPrimeDivisionCount > 0)
                     {
                         //append it to the result string if it's been divided
-                        result += string.Format("({0}{1})", prime, currentPrimeDivisionCount > 1 ? "**" + currentPrimeDivisionCount : "");
+                        result += string.Format("({0}{1})", currentPrime, currentPrimeDivisionCount > 1 ? "**" + currentPrimeDivisionCount : "");
                     }
 
                     currentPrimeDivisionCount = 0;
-                    i++;
+                    //start with the smallest prime first
+                    currentPrime = GetNextPrimeInSieve(sieve, previousPrime);
+
                 }
 
                 if (runningTotal == 1)
                 {
                     //append the last prime
-                    result += string.Format("({0}{1})", prime, currentPrimeDivisionCount > 1 ? "**" + currentPrimeDivisionCount : "");
+                    result += string.Format("({0}{1})", currentPrime, currentPrimeDivisionCount > 1 ? "**" + currentPrimeDivisionCount : "");
                     isDecomposed = true;
                 }
+
+                previousPrime = currentPrime;
             }
 
           
@@ -66,38 +70,85 @@ namespace Codewars
     
         }
 
-        private static int[] generatePrimesUpTo(int max)
-        {
-            var arry = new List<int>();
-
-            if (max < 2)
-                return arry.ToArray();
             
-            for(int i = 2; i < max; i++)
+
+        static int GetNextPrimeInSieve(bool[] sieve, int current)
+        {
+            for (int i = current+1; i < sieve.Length; i++)
             {
-                if (isPrime(i))
-                    arry.Add(i);
+                if(sieve[i] == true)
+                {
+                    return i;
+                }
             }
 
-            return arry.ToArray();
+
+            return 2;
         }
 
 
-        static bool isPrime(int num)
+        /// <summary>
+        /// Returns and array of bools, each item represents every integer from 0 to the max number in order.
+        /// If the bool is true, then it is a prime.
+        /// </summary>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        static bool[] SieveOfEratothenes(int max)
         {
-            if (num < 2)
-                return false;
+            bool[] flags = new bool[max + 1];
 
-            //optimise to only check square roots of numbers
-            int sqrt = (int)Math.Sqrt(num);
+            int count = 0;
 
-            for (int i = 2; i < sqrt; i++)
+            //set all flags to true apart from 0 and 1
+            for(int i = 2; i < flags.Length; i++)
             {
-                if (num % i == 0)
-                    return false;
+                flags[i] = true;
             }
 
-            return true;
+            int prime = 2;
+
+            while(prime <= Math.Sqrt(max))
+            {
+                //squareRoot optimisation saves us a lot of time
+
+                //cross off the remaining multipes of the prime
+                crossOff(flags, prime);
+
+                //get the next value which is set to true and cross it off
+
+                prime = getNextPrime(flags, prime);
+                
+
+            }
+
+
+            return flags;
+        }
+
+        private static void crossOff(bool[] flags, int prime)
+        {
+            /* Cross off remaining multiples of prime. Start wihth prime * prime
+             * because we if we have a k * prime, where k < prime, this value would have
+             * already been cross off on a previous iteration */
+
+            for(int i = prime * prime; i < flags.Length; i +=prime)
+            {
+                //increment by our prime for each iteration and cross it off
+                flags[i] = false;
+            }
+        }
+
+
+        private static int getNextPrime(bool[] flags, int prime)
+        {
+            int next = prime + 1;
+            
+            while(next < flags.Length && !flags[next])
+            {
+                next++;
+            }
+
+            return next;
         }
     }
 }
