@@ -21,17 +21,21 @@ namespace Codewars
 
             var currentPrimeDivisionCount = 0;
 
+            int i = 0;
 
             var sieve = SieveOfEratothenes(lst);
+
+            int[] primes = GetOnlyThePrimes(sieve);
 
             var currentPrime = 2;
             var previousPrime = 1;
 
             while (!isDecomposed)
             {
+                currentPrime = primes[i];
 
                 //check if we can divide by current prime
-                if(runningTotal % currentPrime == 0)
+                if (runningTotal % currentPrime == 0)
                 {
                     runningTotal = runningTotal / currentPrime;
                     currentPrimeDivisionCount++;
@@ -49,9 +53,9 @@ namespace Codewars
                     }
 
                     currentPrimeDivisionCount = 0;
-                    //start with the smallest prime first
-                    currentPrime = GetNextPrimeInSieve(sieve, previousPrime);
 
+                    //next prime
+                    i++;
                 }
 
                 if (runningTotal == 1)
@@ -70,7 +74,20 @@ namespace Codewars
     
         }
 
-            
+        private static int[] GetOnlyThePrimes(bool[] sieve)
+        {
+            var resultList = new List<int>();
+
+            for(int i = 0; i < sieve.Length; i++)
+            {
+                if(sieve[i])
+                {
+                    resultList.Add(i);
+                }
+            }
+
+            return resultList.ToArray();
+        }
 
         static int GetNextPrimeInSieve(bool[] sieve, int current)
         {
